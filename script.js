@@ -64,52 +64,11 @@ function addElement(tasksArr) {
 
   let hash, wordBefore, wordAfter;
   tasksArr.forEach((task) => {
-    // [1]- # ? ✔
-    if (task.title.includes("#")) {
-      // [2]- # in 0? ✔
-      if (task.title[0] === "#") {
-        // [3]- space? ✔
-        if (task.title.includes(" ")) {
-          wordBefore = false || "";
-          hash = task.title.slice(
-            task.title.indexOf("#"),
-            task.title.indexOf(" ")
-          );
-          wordAfter = task.title.slice(task.title.indexOf(" "));
-        }
-        // [3]- space? x
-        else {
-          wordBefore = false || "";
-          hash = task.title.slice(task.title.indexOf("#"));
-          wordAfter = false || "";
-        }
-      }
-      // [2]- # in 0? x
-      else {
-        // [3]- space? ✔
-        if (task.title.split("").filter((e) => e === " ").length === 1) {
-          wordBefore = task.title.slice(0, task.title.indexOf("#"));
-          hash = task.title.slice(task.title.indexOf("#"));
-          wordAfter = false || "";
-        } else if (task.title.split("").filter((e) => e === " ").length > 1) {
-          wordBefore = task.title.slice(0, task.title.indexOf("#"));
-          hash = task.title.slice(
-            task.title.indexOf("#"),
-            task.title.indexOf(" ", task.title.indexOf("#"))
-          );
-          wordAfter = task.title.slice(
-            task.title.indexOf(" ", task.title.indexOf("#"))
-          );
-        }
-        // [3]- space? x
-        else {
-          wordBefore = task.title.slice(0, task.title.indexOf("#"));
-          hash = task.title.slice(task.title.indexOf("#"));
-          wordAfter = false || "";
-        }
-      }
+   if (task.title.includes("#")) {
+      hash = task.title.split(" ").find((s) => s.includes("#"));
+      wordBefore = task.title.slice(0, task.title.indexOf(hash));
+      wordAfter = task.title.slice(task.title.indexOf(hash) + hash.length);
     }
-    // [1]- # ? x
     else {
       wordBefore = task.title;
       hash = false || "";
