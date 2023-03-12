@@ -87,7 +87,11 @@ function addElement(tasksArr) {
       // [2]- # in 0? x
       else {
         // [3]- space? ✔
-        if (task.title.includes(" ")) {
+        if (task.title.split("").filter((e) => e === " ").length === 1) {
+          wordBefore = task.title.slice(0, task.title.indexOf("#"));
+          hash = task.title.slice(task.title.indexOf("#"));
+          wordAfter = false || "";
+        } else if (task.title.split("").filter((e) => e === " ").length > 1) {
           wordBefore = task.title.slice(0, task.title.indexOf("#"));
           hash = task.title.slice(
             task.title.indexOf("#"),
